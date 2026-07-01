@@ -48,3 +48,6 @@ docs/_buildenv*
 
 *.sqlite3
 _autofixture*
+
+# Pipenv
+Pipfile*

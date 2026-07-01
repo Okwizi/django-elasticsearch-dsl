@@ -1,7 +1,0 @@
-bumpversion==0.6.0
-wheel==0.45.1
-django>=4.2
-elasticsearch>=9.0.0,<10.0.0
-twine
-sphinx
--e .

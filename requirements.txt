@@ -1,2 +1,0 @@
-django>=4.2
-elasticsearch>=9.0.0,<10.0.0

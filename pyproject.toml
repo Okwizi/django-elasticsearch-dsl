@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-elasticsearch-dsl"
+version = "9.0"
+description = "Wrapper around elasticsearch-dsl-py for django models"
+requires-python = ">=3.9"
+readme = { file = "README.rst", content-type = "text/x-rst" }
+license = "Apache-2.0"
+authors = [{ name = "Sabricot" }]
+keywords = ["django", "elasticsearch", "elasticsearch-dsl"]
+dependencies = [
+    "django>=4.2",
+    "elasticsearch>=9.0.0,<10.0.0",
+    "six",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+source = "https://github.com/sabricot/django-elasticsearch-dsl"
+documentation = "https://django-elasticsearch-dsl.readthedocs.io/"
+
+[project.optional-dependencies]
+celery = ["celery>=5.5.3"]
+test = [
+    "coverage>=7.9.1",
+    "mock>=5.2.0",
+    "flake8>=7.3.0",
+    "Pillow>=11.0.0",
+    "celery>=5.5.3",
+]
+docs = ["sphinx"]
+dev = ["tox-uv", "twine", "wheel"]
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["django_elasticsearch_dsl", "django_elasticsearch_dsl.*"]

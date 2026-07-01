@@ -12,6 +12,7 @@
 
 import sys
 import os
+from importlib.metadata import PackageNotFoundError, version as _pkg_version
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -59,7 +60,10 @@ author = 'sabricot and others'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '7.1.1'
+try:
+    release = _pkg_version("django-elasticsearch-dsl")
+except PackageNotFoundError:
+    release = "0.0.0"
 # The short X.Y version
 version = ".".join(release.split(".", 3)[:2])
 

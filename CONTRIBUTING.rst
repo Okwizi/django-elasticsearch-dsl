@@ -62,11 +62,20 @@ Ready to contribute? Here's how to set up `django-elasticsearch-dsl` for local d
 
     $ git clone git@github.com:your_name_here/django-elasticsearch-dsl.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtual environment. This project uses
+   `uv <https://docs.astral.sh/uv/>`_ for dependency management::
 
-    $ mkvirtualenv django-elasticsearch-dsl
     $ cd django-elasticsearch-dsl/
-    $ python setup.py develop
+    $ uv sync --extra test --extra dev
+
+   This creates a ``.venv`` with the package installed in editable mode along
+   with the test and development dependencies.
+
+   Alternatively, create and activate your own virtual environment and install
+   the package with pip::
+
+    $ source <path-to-venv>/bin/activate
+    $ pip install -e '.[test,dev]'
 
 4. Create a branch for local development::
 
@@ -77,11 +86,21 @@ Ready to contribute? Here's how to set up `django-elasticsearch-dsl` for local d
 5. When you're done making changes, check that your changes pass flake8 and the
    tests, including testing other Python versions with tox::
 
-        $ flake8 django_elasticsearch_dsl tests
-        $ python setup.py test
-        $ tox
+        $ uv run flake8 django_elasticsearch_dsl tests
+        $ uv run python runtests.py
+        $ uv run tox
 
-   To get flake8 and tox, just pip install them into your virtualenv.
+   flake8 comes from the ``test`` extra and tox from the ``dev`` extra, both
+   installed by the ``uv sync`` command above. If you are using your own
+   activated virtual environment, drop the ``uv run`` prefix and run the
+   commands directly.
+
+   If you change the project's dependencies in ``pyproject.toml``, refresh the
+   lockfile and commit it::
+
+        $ uv lock
+
+   CI runs ``uv lock --check`` and will fail if ``uv.lock`` is out of date.
 
 6. Commit your changes and push your branch to GitHub::
 

@@ -15,15 +15,37 @@ Testing
 =======
 
 
-You can run the tests by creating a Python virtual environment, installing
-the requirements from ``requirements_test.txt`` (``pip install -r requirements_test``)::
+This project is configured with ``pyproject.toml`` and its dependencies are
+locked in ``uv.lock``. The test dependencies live in the ``test`` extra.
 
+Using `uv <https://docs.astral.sh/uv/>`_, create the environment and run the
+tests with::
+
+    $ uv sync --extra test
+    $ uv run python runtests.py
+
+Alternatively, create and activate your own virtual environment and install the
+package with its test extra using pip::
+
+    $ source <path-to-venv>/bin/activate
+    $ pip install -e '.[test]'
     $ python runtests.py
 
 
 For integration testing with a running Elasticsearch server::
 
+    $ uv run python runtests.py --elasticsearch [localhost:9200]
+    # or, inside an activated virtual environment:
     $ python runtests.py --elasticsearch [localhost:9200]
+
+
+To run the tests against all supported Python and Django versions, use tox
+(provided by the ``dev`` extra)::
+
+    $ uv run --extra dev tox
+    # or, inside an activated virtual environment:
+    $ pip install -e '.[dev]'
+    $ tox
 
 TODO
 ====
